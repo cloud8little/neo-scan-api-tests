@@ -1,0 +1,45 @@
+{
+  "name": "neo-scan-api-tests",
+  "version": "1.0.0",
+  "description": "API tests by Jest and SuperTest for neoscan.io API",
+  "author": "Jakub Mucha <biuro@muchastudio.com.pl>",
+  "repository": "git@github.com:drptbl/neo-scan-api-tests.git",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "lint": "./node_modules/.bin/eslint tests/**",
+    "eslint-check": "./node_modules/.bin/eslint --print-config .eslintrc.json | ./node_modules/.bin/eslint-config-prettier-check"
+  },
+  "devDependencies": {
+    "dotenv": "5.0.1",
+    "eslint": "4.19.1",
+    "eslint-config-prettier": "2.9.0",
+    "eslint-plugin-jest": "21.15.1",
+    "eslint-plugin-prettier": "2.6.0",
+    "jest": "22.4.3",
+    "jest-html-reporter": "2.3.0",
+    "jest-json-schema": "2.0.0",
+    "prettier": "1.12.1",
+    "supertest": "3.0.0",
+    "winston": "2.4.2"
+  },
+  "jest": {
+    "verbose": true,
+    "testMatch": [
+      "<rootDir>/tests/*.js"
+    ],
+    "setupFiles": [
+      "./helpers/setup.js"
+    ],
+    "reporters": [
+      "default",
+      "<rootDir>/node_modules/jest-html-reporter"
+    ]
+  },
+  "jest-html-reporter": {
+    "pageTitle": "API tests by Jest and SuperTest for neoscan.io API",
+    "outputPath": "results/test-report.html",
+    "executionMode": "reporter",
+    "includeFailureMsg": true
+  }
+}
