@@ -25,11 +25,9 @@
   },
   "jest": {
     "verbose": true,
+    "globalSetup": "<rootDir>/helpers/setup.js",
     "testMatch": [
       "<rootDir>/tests/*.js"
-    ],
-    "setupFiles": [
-      "./helpers/setup.js"
     ],
     "reporters": [
       "default",
