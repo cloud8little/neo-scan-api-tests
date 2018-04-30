@@ -25,6 +25,7 @@
   },
   "jest": {
     "verbose": true,
+    "setupTestFrameworkScriptFile": "<rootDir>/helpers/frameworkSetup.js",
     "globalSetup": "<rootDir>/helpers/setup.js",
     "testMatch": [
       "<rootDir>/tests/*.js"
