@@ -1,1 +1,3 @@
-require('dotenv').config();
+module.exports = async function() {
+  require('dotenv').config();
+};
