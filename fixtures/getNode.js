@@ -6,6 +6,9 @@ const getNode = {
   getAllNodes: () => {
     return request.get(`/get_all_nodes`);
   },
+  getNodes: () => {
+    return request.get(`/get_nodes`);
+  },
 };
 
 module.exports = getNode;
