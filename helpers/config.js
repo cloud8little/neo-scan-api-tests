@@ -1,9 +1,9 @@
 const config = {
   getHost: () => {
     if (process.env.NETWORK.toLowerCase().includes('test')) {
-      return 'https://api.neoscan.io/api/test_net/v1';
+      return process.env.TESTNET_URL;
     } else {
-      return 'https://api.neoscan.io/api/main_net/v1';
+      return process.env.MAINNET_URL;
     }
   },
 };
