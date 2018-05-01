@@ -1,1 +1,1 @@
-jest.setTimeout(process.env.TIMEOUT);
+jest.setTimeout(process.env.TEST_TIMEOUT);
