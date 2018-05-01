@@ -37,9 +37,14 @@
     ]
   },
   "jest-html-reporter": {
-    "pageTitle": "API tests by Jest and SuperTest for neoscan.io API",
-    "outputPath": "results/test-report.html",
     "executionMode": "reporter",
+    "pageTitle": "Results of API tests for neoscan.io",
+    "outputPath": "results/test-report.html",
+    "logo": "coz_logo.png",
+    "theme": "lightTheme",
+    "sort": "status",
+    "dateFormat": "dd-mm-yyyy HH:MM:ss",
+    "executionTimeWarningThreshold": 5,
     "includeFailureMsg": true
   }
 }
