@@ -13,7 +13,7 @@ const getBlock = {
     return request.get(`/get_last_blocks`);
   },
   getBlock: hashOrBlockHeight => {
-    return request.get(`/get_balance/${hashOrBlockHeight}`);
+    return request.get(`/get_block/${hashOrBlockHeight}`);
   },
 };
 
