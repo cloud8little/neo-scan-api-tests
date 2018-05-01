@@ -9,6 +9,9 @@ const getClaim = {
   getClaimed: hash => {
     return request.get(`/get_claimed/${hash}`);
   },
+  getUnclaimed: hash => {
+    return request.get(`/get_unclaimed/${hash}`);
+  },
 };
 
 module.exports = getClaim;
