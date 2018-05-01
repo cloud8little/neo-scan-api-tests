@@ -18,6 +18,13 @@ describe('GET /get_claimed/{hash_string}', () => {
       .expect(200)
       .then(response => {
         expect(response).toEqual(expect.anything());
+describe('GET /get_unclaimed/{hash_string}', () => {
+  it('should be online', () => {
+    return fixtures
+      .getUnclaimed(process.env.WALLET_HASH)
+      .expect(200)
+      .then(response => {
+        expect(response.body).toEqual(expect.anything());
       });
   });
 });
