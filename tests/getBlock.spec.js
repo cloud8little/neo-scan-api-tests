@@ -6,7 +6,7 @@ describe('GET /get_height', () => {
       .getHeight()
       .expect(200)
       .then(response => {
-        expect(response).toEqual(expect.anything());
+        expect(response.body).toEqual(expect.anything());
       });
   });
 });
@@ -17,7 +17,7 @@ describe('GET /get_highest_block', () => {
       .getHighestBlock()
       .expect(200)
       .then(response => {
-        expect(response).toEqual(expect.anything());
+        expect(response.body).toEqual(expect.anything());
       });
   });
 });
@@ -28,7 +28,7 @@ describe('GET /get_last_blocks', () => {
       .getLastBlocks()
       .expect(200)
       .then(response => {
-        expect(response).toEqual(expect.anything());
+        expect(response.body).toEqual(expect.anything());
       });
   });
 });
@@ -41,7 +41,7 @@ describe('GET /get_block/{hash_string}', () => {
         .getBlock(blockHash)
         .expect(200)
         .then(response => {
-          expect(response).toEqual(expect.anything());
+          expect(response.body).toEqual(expect.anything());
         });
     });
   });
@@ -55,7 +55,7 @@ describe('GET /get_block/{height}', () => {
         .getBlock(blockHeight)
         .expect(200)
         .then(response => {
-          expect(response).toEqual(expect.anything());
+          expect(response.body).toEqual(expect.anything());
         });
     });
   });

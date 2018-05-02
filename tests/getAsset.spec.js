@@ -8,7 +8,7 @@ describe('GET /get_asset/{hash_string}', () => {
         .getAsset(firstAssetTxid)
         .expect(200)
         .then(response => {
-          expect(response).toEqual(expect.anything());
+          expect(response.body).toEqual(expect.anything());
         });
     });
   });
@@ -20,7 +20,7 @@ describe('GET /get_assets', () => {
       .getAssets()
       .expect(200)
       .then(response => {
-        expect(response).toEqual(expect.anything());
+        expect(response.body).toEqual(expect.anything());
       });
   });
 });

@@ -6,7 +6,7 @@ describe('GET /get_balance/{hash_string}', () => {
       .getBalance(process.env.WALLET_HASH)
       .expect(200)
       .then(response => {
-        expect(response).toEqual(expect.anything());
+        expect(response.body).toEqual(expect.anything());
       });
   });
 });

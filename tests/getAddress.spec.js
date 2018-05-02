@@ -6,7 +6,7 @@ describe('GET /get_address/{hash_string}', () => {
       .getAddress(process.env.WALLET_HASH)
       .expect(200)
       .then(response => {
-        expect(response).toEqual(expect.anything());
+        expect(response.body).toEqual(expect.anything());
       });
   });
 });
@@ -17,7 +17,7 @@ describe('GET /get_address_abstracts/{hash_string}/{page}', () => {
       .getAddressAbstracts(process.env.WALLET_HASH, 1)
       .expect(200)
       .then(response => {
-        expect(response).toEqual(expect.anything());
+        expect(response.body).toEqual(expect.anything());
       });
   });
 });
@@ -28,7 +28,7 @@ describe('GET /get_address_neon/{hash_string}', () => {
       .getAddressNeon(process.env.WALLET_HASH)
       .expect(200)
       .then(response => {
-        expect(response).toEqual(expect.anything());
+        expect(response.body).toEqual(expect.anything());
       });
   });
 });
@@ -39,7 +39,7 @@ describe('GET /get_address_to_address_abstracts/{hash_string}/{hash_string}/{pag
       .getAddressToAddressAbstracts(process.env.WALLET_HASH, process.env.WALLET_HASH_SECONDARY, 1)
       .expect(200)
       .then(response => {
-        expect(response).toEqual(expect.anything());
+        expect(response.body).toEqual(expect.anything());
       });
   });
 });

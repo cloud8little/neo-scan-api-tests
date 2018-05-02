@@ -6,7 +6,11 @@ describe('GET /get_all_nodes', () => {
       .getAllNodes()
       .expect(200)
       .then(response => {
-        expect(response).toEqual(expect.anything());
+        expect(response.body).toEqual(expect.anything());
+      });
+  });
+});
+
 describe('GET /get_nodes', () => {
   it('should be online', () => {
     return fixtures
