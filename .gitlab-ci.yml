@@ -1,0 +1,25 @@
+stages:
+  - test
+
+variables:
+  DOCKER_IMAGE: node:8
+  YARN_SET_CACHE: 'yarn config set cache-folder $CI_PROJECT_DIR/.yarn'
+  YARN_INSTALL_DEPS: 'yarn --pure-lockfile'
+
+cache:
+  key: "$CI_PROJECT_NAME-$CI_PROJECT_ID"
+  paths:
+    - "$CI_PROJECT_DIR/.yarn"
+
+test:
+  image: "$DOCKER_IMAGE"
+  stage: test
+  before_script:
+    - '$YARN_SET_CACHE'
+    - '$YARN_INSTALL_DEPS'
+  script:
+    - yarn test
+  artifacts:
+    expire_in: 2 days
+    paths:
+    - results/
