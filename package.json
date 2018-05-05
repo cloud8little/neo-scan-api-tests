@@ -38,7 +38,7 @@
       [
         "<rootDir>/node_modules/jest-discord-reporter",
         {
-          "sendOnlyWhenFailed": false,
+          "sendOnlyWhenFailed": true,
           "username": "neoscan-api-reporter"
         }
       ]
