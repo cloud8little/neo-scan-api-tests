@@ -39,7 +39,7 @@ describe('GET /get_block/{hash_string}', () => {
       const blockHash = response.body.hash;
       return fixtures
         .getBlock(blockHash)
-        .expect(200)
+        .expect(404)
         .then(response => {
           expect(response.body).toEqual(expect.anything());
         });
