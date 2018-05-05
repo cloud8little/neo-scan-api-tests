@@ -1899,9 +1899,9 @@ jest-diff@^22.4.3:
     jest-get-type "^22.4.3"
     pretty-format "^22.4.3"
 
-jest-discord-reporter@1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/jest-discord-reporter/-/jest-discord-reporter-1.0.3.tgz#1a1fa79b8e20beeab9943108b6c42606d50c9d92"
+jest-discord-reporter@1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/jest-discord-reporter/-/jest-discord-reporter-1.0.5.tgz#7c0b33210824167618133384e257601c553ae587"
   dependencies:
     env-ci "2.1.0"
     request "2.85.0"
