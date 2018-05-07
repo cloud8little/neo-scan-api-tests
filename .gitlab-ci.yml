@@ -23,4 +23,3 @@ test:
     expire_in: 2 days
     paths:
     - results/
-    - testStatus.json
