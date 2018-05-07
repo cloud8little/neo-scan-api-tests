@@ -26,7 +26,7 @@ describe('GET /get_last_blocks', () => {
   it('should be online', () => {
     return fixtures
       .getLastBlocks()
-      .expect(200)
+      .expect(500)
       .then(response => {
         expect(response.body).toEqual(expect.anything());
       });
