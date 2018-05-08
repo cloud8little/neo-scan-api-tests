@@ -1,8 +1,8 @@
 const config = {
   ftp: {
-    host: '<PUT_HOST_HERE>',
-    user: '<PUT_USERNAME_HERE>',
-    pass: '<PUT_PASSWORD_HERE>',
+    host: '<PUT_HOST_HERE>', // can be replaced with process.env.FTP_HOST
+    user: '<PUT_USERNAME_HERE>', // can be replaced with process.env.FTP_USER
+    pass: '<PUT_PASSWORD_HERE>', // can be replaced with process.env.FTP_PASS
   },
   getHost: () => {
     if (process.env.CI_NETWORK) {
