@@ -16,12 +16,13 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@cityofzion/neoscan-status-reporter@cityofzion/neoscan-status-reporter#master":
-  version "1.0.6"
-  resolved "https://codeload.github.com/cityofzion/neoscan-status-reporter/tar.gz/45dc52e1699e3c6e1fb1c33fec3f9fdeccc05833"
+"@cityofzion/neoscan-status-reporter@cityofzion/neoscan-status-reporter#9a20e65":
+  version "1.0.7"
+  resolved "https://codeload.github.com/cityofzion/neoscan-status-reporter/tar.gz/9a20e65a41ba138844106c2de1ad5c8b67c7d96d"
   dependencies:
     axios "0.18.0"
     env-ci "2.1.0"
+    jsonfile "4.0.0"
 
 abab@^1.0.4:
   version "1.0.4"
@@ -1352,7 +1353,7 @@ globby@^5.0.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-graceful-fs@^4.1.11, graceful-fs@^4.1.2:
+graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
@@ -2205,6 +2206,12 @@ json-stringify-safe@~5.0.1:
 json5@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
+
+jsonfile@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-4.0.0.tgz#8771aae0799b64076b76640fca058f9c10e33ecb"
+  optionalDependencies:
+    graceful-fs "^4.1.6"
 
 jsonify@~0.0.0:
   version "0.0.0"
