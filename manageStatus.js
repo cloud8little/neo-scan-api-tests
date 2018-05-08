@@ -9,7 +9,7 @@ var ftpConfig = {
   password: process.env.FTP_PASS || config.ftp.pass,
 };
 
-if (!process.env.SEND_DETAILS) {
+if (!process.env.SEND_DETAILS && process.env.CI_NETWORK) {
   ftp.connect(ftpConfig);
 
   ftp.exist(`/${process.env.CI_NETWORK}`, exist => {
@@ -25,7 +25,9 @@ if (!process.env.SEND_DETAILS) {
           } else if (args[0] === 'upload') {
             upload();
           } else {
-            console.log(`Please pass 'upload' or 'download' while running this script`);
+            console.log(
+              `[manageStatus] Please pass 'upload' or 'download' while running this script`
+            );
             ftp.close();
           }
         }
@@ -36,13 +38,13 @@ if (!process.env.SEND_DETAILS) {
       } else if (args[0] === 'upload') {
         upload();
       } else {
-        console.log(`Please pass 'upload' or 'download' while running this script`);
+        console.log(`[manageStatus] Please pass 'upload' or 'download' while running this script`);
         ftp.close();
       }
     }
   });
 } else {
-  console.log('[manageStatus] Skipping my work because job was triggered manually');
+  console.log('[manageStatus] Skipping downloading/uploading because this is not scheduled job');
 }
 
 function download() {
@@ -51,6 +53,8 @@ function download() {
       ftp.download(`/${process.env.CI_NETWORK}/testStatus.json`, 'results/testStatus.json', err => {
         if (err) {
           console.log(err);
+        } else {
+          console.log('[manageStatus] Downloaded test status with success');
         }
         ftp.close();
       });
@@ -67,6 +71,8 @@ function upload() {
   ftp.upload('results/testStatus.json', `/${process.env.CI_NETWORK}/testStatus.json`, err => {
     if (err) {
       console.log(err);
+    } else {
+      console.log('[manageStatus] Uploaded test status with success');
     }
     ftp.close();
   });
