@@ -9,37 +9,41 @@ var ftpConfig = {
   password: process.env.FTP_PASS || config.ftp.pass,
 };
 
-ftp.connect(ftpConfig);
+if (!process.env.SEND_DETAILS) {
+  ftp.connect(ftpConfig);
 
-ftp.exist(`/${process.env.CI_NETWORK}`, exist => {
-  if (!exist) {
-    console.log(`Catalog /${process.env.CI_NETWORK} doesn't exist, creating..`);
-    ftp.mkdir(`/${process.env.CI_NETWORK}`, err => {
-      if (err) {
-        console.log(err);
-        ftp.close();
-      } else {
-        if (args[0] === 'download') {
-          download();
-        } else if (args[0] === 'upload') {
-          upload();
-        } else {
-          console.log(`Please pass 'upload' or 'download' while running this script`);
+  ftp.exist(`/${process.env.CI_NETWORK}`, exist => {
+    if (!exist) {
+      console.log(`Catalog /${process.env.CI_NETWORK} doesn't exist, creating..`);
+      ftp.mkdir(`/${process.env.CI_NETWORK}`, err => {
+        if (err) {
+          console.log(err);
           ftp.close();
+        } else {
+          if (args[0] === 'download') {
+            download();
+          } else if (args[0] === 'upload') {
+            upload();
+          } else {
+            console.log(`Please pass 'upload' or 'download' while running this script`);
+            ftp.close();
+          }
         }
-      }
-    });
-  } else {
-    if (args[0] === 'download') {
-      download();
-    } else if (args[0] === 'upload') {
-      upload();
+      });
     } else {
-      console.log(`Please pass 'upload' or 'download' while running this script`);
-      ftp.close();
+      if (args[0] === 'download') {
+        download();
+      } else if (args[0] === 'upload') {
+        upload();
+      } else {
+        console.log(`Please pass 'upload' or 'download' while running this script`);
+        ftp.close();
+      }
     }
-  }
-});
+  });
+} else {
+  console.log('[manageStatus] Skipping my work because job was triggered manually');
+}
 
 function download() {
   ftp.exist(`/${process.env.CI_NETWORK}/testStatus.json`, exist => {
