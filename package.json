@@ -11,7 +11,7 @@
     "eslint-check": "./node_modules/.bin/eslint --print-config .eslintrc.json | ./node_modules/.bin/eslint-config-prettier-check"
   },
   "devDependencies": {
-    "@cityofzion/neoscan-status-reporter": "cityofzion/neoscan-status-reporter#9a20e65",
+    "@cityofzion/neoscan-status-reporter": "cityofzion/neoscan-status-reporter#108f723",
     "dotenv": "5.0.1",
     "easy-ftp": "0.3.40",
     "eslint": "4.19.1",

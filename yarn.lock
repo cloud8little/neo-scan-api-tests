@@ -16,9 +16,9 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@cityofzion/neoscan-status-reporter@cityofzion/neoscan-status-reporter#9a20e65":
+"@cityofzion/neoscan-status-reporter@cityofzion/neoscan-status-reporter#108f723":
   version "1.0.7"
-  resolved "https://codeload.github.com/cityofzion/neoscan-status-reporter/tar.gz/9a20e65a41ba138844106c2de1ad5c8b67c7d96d"
+  resolved "https://codeload.github.com/cityofzion/neoscan-status-reporter/tar.gz/108f723eaf7a26655c5dc9d91917a6142dc06e6b"
   dependencies:
     axios "0.18.0"
     env-ci "2.1.0"
