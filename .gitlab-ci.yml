@@ -10,7 +10,6 @@ cache:
   key: "$CI_PROJECT_NAME-$CI_PROJECT_ID"
   paths:
     - "$CI_PROJECT_DIR/.yarn"
-    - "$CI_PROJECT_DIR/results/*.json"
 
 test:
   image: "$DOCKER_IMAGE"
