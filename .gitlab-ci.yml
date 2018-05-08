@@ -5,6 +5,8 @@ variables:
   DOCKER_IMAGE: node:8
   YARN_SET_CACHE: 'yarn config set cache-folder $CI_PROJECT_DIR/.yarn'
   YARN_INSTALL_DEPS: 'yarn --pure-lockfile'
+  DOWNLOAD_TEST_STATUS: 'node manageStatus.js download'
+  UPLOAD_TEST_STATUS: 'node manageStatus.js upload'
 
 cache:
   key: "$CI_PROJECT_NAME-$CI_PROJECT_ID"
@@ -12,14 +14,16 @@ cache:
     - "$CI_PROJECT_DIR/.yarn"
 
 test:
-  retry: 2
   image: "$DOCKER_IMAGE"
   stage: test
   before_script:
     - '$YARN_SET_CACHE'
     - '$YARN_INSTALL_DEPS'
+    - '$DOWNLOAD_TEST_STATUS'
   script:
     - yarn test
+  after_script:
+    - '$UPLOAD_TEST_STATUS'
   artifacts:
     when: always
     expire_in: 2 days
