@@ -1,16 +1,14 @@
-const supertest = require('supertest');
-const config = require('../helpers/config');
-const request = supertest(config.getHost());
+const { req } = require('../helpers/config');
 
 const getClaim = {
   getClaimable: hash => {
-    return request.get(`/get_claimable/${hash}`);
+    return req(`/get_claimable/${hash}`);
   },
   getClaimed: hash => {
-    return request.get(`/get_claimed/${hash}`);
+    return req(`/get_claimed/${hash}`);
   },
   getUnclaimed: hash => {
-    return request.get(`/get_unclaimed/${hash}`);
+    return req(`/get_unclaimed/${hash}`);
   },
 };
 

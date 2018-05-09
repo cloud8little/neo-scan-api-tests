@@ -1,13 +1,11 @@
-const supertest = require('supertest');
-const config = require('../helpers/config');
-const request = supertest(config.getHost());
+const { req } = require('../helpers/config');
 
 const getNode = {
   getAllNodes: () => {
-    return request.get(`/get_all_nodes`);
+    return req(`/get_all_nodes`);
   },
   getNodes: () => {
-    return request.get(`/get_nodes`);
+    return req(`/get_nodes`);
   },
 };
 
