@@ -1,79 +1,107 @@
 const config = require('./helpers/config');
-const EasyFtp = require('easy-ftp');
-const ftp = new EasyFtp();
+const jsonfile = require('jsonfile');
+const { RepositoryFiles } = require('gitlab');
 const args = process.argv.slice(2);
 
-var ftpConfig = {
-  host: process.env.FTP_HOST || config.ftp.host,
-  username: process.env.FTP_USER || config.ftp.user,
-  password: process.env.FTP_PASS || config.ftp.pass,
-};
+const api = new RepositoryFiles({
+  url: process.env.GITLAB_HOST_URL || config.gitlab.hostUrl,
+  token: process.env.GITLAB_PERS_TOKEN || config.gitlab.personalToken,
+});
 
 if (!process.env.SEND_DETAILS && process.env.CI_NETWORK) {
-  ftp.connect(ftpConfig);
-
-  ftp.exist(`/${process.env.CI_NETWORK}`, exist => {
-    if (!exist) {
-      console.log(`Catalog /${process.env.CI_NETWORK} doesn't exist, creating..`);
-      ftp.mkdir(`/${process.env.CI_NETWORK}`, err => {
-        if (err) {
-          console.log(err);
-          ftp.close();
-        } else {
-          if (args[0] === 'download') {
-            download();
-          } else if (args[0] === 'upload') {
-            upload();
-          } else {
-            console.log(
-              `[manageStatus] Please pass 'upload' or 'download' while running this script`
-            );
-            ftp.close();
-          }
-        }
-      });
-    } else {
+  api
+    .show(
+      process.env.GITLAB_STATUS_PROJ_ID || config.gitlab.statusProjectId,
+      `${process.env.CI_COMMIT_REF_NAME}/${process.env.CI_NETWORK}/testStatus.json`,
+      'master'
+    )
+    .then(() => {
+      console.log(`[manageStatus] File exists, trying to ${args[0]}..`);
       if (args[0] === 'download') {
         download();
       } else if (args[0] === 'upload') {
         upload();
       } else {
         console.log(`[manageStatus] Please pass 'upload' or 'download' while running this script`);
-        ftp.close();
       }
-    }
-  });
+    })
+    .catch(err => {
+      if (err.response.body.message.includes('404')) {
+        console.log(`[manageStatus] File doesn't exist, creating..`);
+        api
+          .create(
+            process.env.GITLAB_STATUS_PROJ_ID || config.gitlab.statusProjectId,
+            `${process.env.CI_COMMIT_REF_NAME}/${process.env.CI_NETWORK}/testStatus.json`,
+            'master',
+            {
+              content: '{"testsFailedNow":false,"testsFailedBefore":false}',
+              commit_message: 'init commit',
+            }
+          )
+          .then(() => {
+            console.log('[manageStatus] File created!');
+          })
+          .catch(err => {
+            console.error(`[manageStatus] File creation failed: ${err.response.body.message}`);
+          });
+      }
+    });
 } else {
   console.log('[manageStatus] Skipping downloading/uploading because this is not scheduled job');
 }
 
 function download() {
-  ftp.exist(`/${process.env.CI_NETWORK}/testStatus.json`, exist => {
-    if (exist) {
-      ftp.download(`/${process.env.CI_NETWORK}/testStatus.json`, 'results/testStatus.json', err => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log('[manageStatus] Downloaded test status with success');
-        }
-        ftp.close();
-      });
-    } else {
-      console.log(
-        `/${process.env.CI_NETWORK}/testStatus.json doesn't exist, there is nothing to download`
+  api
+    .showRaw(
+      process.env.GITLAB_STATUS_PROJ_ID || config.gitlab.statusProjectId,
+      `${process.env.CI_COMMIT_REF_NAME}/${process.env.CI_NETWORK}/testStatus.json`,
+      'master'
+    )
+    .then(data => {
+      writeJson('./results/testStatus.json', data);
+    })
+    .catch(err => {
+      console.error(
+        `[manageStatus] There was an error while downloading testStatus.json file: ${err}`
       );
-      ftp.close();
-    }
-  });
+    });
 }
 
 function upload() {
-  ftp.upload('results/testStatus.json', `/${process.env.CI_NETWORK}/testStatus.json`, err => {
+  const data = require('./results/testStatus.json');
+
+  api
+    .edit(
+      process.env.GITLAB_STATUS_PROJ_ID || config.gitlab.statusProjectId,
+      `${process.env.CI_COMMIT_REF_NAME}/${process.env.CI_NETWORK}/testStatus.json`,
+      'master',
+      {
+        content: JSON.stringify(data),
+        commit_message: `update for JOB_ID: ${process.env.CI_JOB_ID}`,
+      }
+    )
+    .then(() => {
+      console.log('[manageStatus] Successfuly uploaded testStatus.json file');
+    })
+    .catch(err => {
+      if (err.response.body.error.includes('content is invalid')) {
+        console.log(`[manageStatus] File wasn't uploaded because it didn't change`);
+      } else {
+        console.error(
+          `[manageStatus] There was an error while uploading testStatus.json file: ${err}`
+        );
+      }
+    });
+}
+
+function writeJson(jsonPath, data) {
+  jsonfile.writeFile(jsonPath, data, err => {
     if (err) {
-      console.log(err);
+      console.error(
+        `[manageStatus] There was an error while updating testStatus.json file: ${err}`
+      );
     } else {
-      console.log('[manageStatus] Uploaded test status with success');
+      console.log('[manageStatus] Successfuly downloaded testStatus.json file');
     }
-    ftp.close();
   });
 }
