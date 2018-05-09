@@ -58,6 +58,7 @@
     "sort": "status",
     "dateFormat": "dd-mm-yyyy HH:MM:ss",
     "executionTimeWarningThreshold": 5,
-    "includeFailureMsg": true
+    "includeFailureMsg": true,
+    "includeConsoleLog": true
   }
 }
