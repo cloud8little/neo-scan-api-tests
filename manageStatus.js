@@ -1,17 +1,17 @@
-const config = require('./helpers/config');
+const settings = require('./settings');
 const jsonfile = require('jsonfile');
 const { RepositoryFiles } = require('gitlab');
 const args = process.argv.slice(2);
 
 const api = new RepositoryFiles({
-  url: process.env.GITLAB_HOST_URL || config.gitlab.hostUrl,
-  token: process.env.GITLAB_PERS_TOKEN || config.gitlab.personalToken,
+  url: process.env.GITLAB_HOST_URL || settings.gitlab.hostUrl,
+  token: process.env.GITLAB_PERS_TOKEN || settings.gitlab.personalToken,
 });
 
 if (!process.env.SEND_DETAILS && process.env.CI_NETWORK) {
   api
     .show(
-      process.env.GITLAB_STATUS_PROJ_ID || config.gitlab.statusProjectId,
+      process.env.GITLAB_STATUS_PROJ_ID || settings.gitlab.statusProjectId,
       `${process.env.CI_COMMIT_REF_NAME}/${process.env.CI_NETWORK}/testStatus.json`,
       'master'
     )
@@ -30,7 +30,7 @@ if (!process.env.SEND_DETAILS && process.env.CI_NETWORK) {
         console.log(`[manageStatus] File doesn't exist, creating..`);
         api
           .create(
-            process.env.GITLAB_STATUS_PROJ_ID || config.gitlab.statusProjectId,
+            process.env.GITLAB_STATUS_PROJ_ID || settings.gitlab.statusProjectId,
             `${process.env.CI_COMMIT_REF_NAME}/${process.env.CI_NETWORK}/testStatus.json`,
             'master',
             {
@@ -53,7 +53,7 @@ if (!process.env.SEND_DETAILS && process.env.CI_NETWORK) {
 function download() {
   api
     .showRaw(
-      process.env.GITLAB_STATUS_PROJ_ID || config.gitlab.statusProjectId,
+      process.env.GITLAB_STATUS_PROJ_ID || settings.gitlab.statusProjectId,
       `${process.env.CI_COMMIT_REF_NAME}/${process.env.CI_NETWORK}/testStatus.json`,
       'master'
     )
@@ -72,7 +72,7 @@ function upload() {
 
   api
     .edit(
-      process.env.GITLAB_STATUS_PROJ_ID || config.gitlab.statusProjectId,
+      process.env.GITLAB_STATUS_PROJ_ID || settings.gitlab.statusProjectId,
       `${process.env.CI_COMMIT_REF_NAME}/${process.env.CI_NETWORK}/testStatus.json`,
       'master',
       {
