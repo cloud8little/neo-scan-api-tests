@@ -1,13 +1,11 @@
-const supertest = require('supertest');
-const config = require('../helpers/config');
-const request = supertest(config.getHost());
+const { req } = require('../helpers/config');
 
 const getAsset = {
   getAsset: hash => {
-    return request.get(`/get_asset/${hash}`);
+    return req(`/get_asset/${hash}`);
   },
   getAssets: () => {
-    return request.get(`/get_assets`);
+    return req(`/get_assets`);
   },
 };
 

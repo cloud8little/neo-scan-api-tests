@@ -1,19 +1,17 @@
-const supertest = require('supertest');
-const config = require('../helpers/config');
-const request = supertest(config.getHost());
+const { req } = require('../helpers/config');
 
 const getBlock = {
   getHighestBlock: () => {
-    return request.get(`/get_highest_block`);
+    return req(`/get_highest_block`);
   },
   getHeight: () => {
-    return request.get(`/get_height`);
+    return req(`/get_height`);
   },
   getLastBlocks: () => {
-    return request.get(`/get_last_blocks`);
+    return req(`/get_last_blocks`);
   },
   getBlock: hashOrBlockHeight => {
-    return request.get(`/get_block/${hashOrBlockHeight}`);
+    return req(`/get_block/${hashOrBlockHeight}`);
   },
 };
 
