@@ -10,14 +10,3 @@ describe('GET /get_all_nodes', () => {
       });
   });
 });
-
-describe('GET /get_nodes', () => {
-  it('should be online', () => {
-    return fixtures
-      .getNodes()
-      .expect(200)
-      .then(response => {
-        expect(response.body).toEqual(expect.anything());
-      });
-  });
-});
