@@ -12,27 +12,24 @@
   },
   "devDependencies": {
     "@cityofzion/neoscan-status-reporter": "cityofzion/neoscan-status-reporter#108f723",
-    "dotenv": "5.0.1",
-    "eslint": "4.19.1",
+    "dotenv": "6.0.0",
+    "eslint": "5.1.0",
     "eslint-config-prettier": "2.9.0",
-    "eslint-plugin-jest": "21.15.1",
-    "eslint-plugin-prettier": "2.6.0",
-    "gitlab": "3.3.0",
-    "jest": "22.4.3",
-    "jest-html-reporter": "2.3.0",
+    "eslint-plugin-jest": "21.17.0",
+    "eslint-plugin-prettier": "2.6.2",
+    "gitlab": "3.5.0",
+    "jest": "23.3.0",
+    "jest-html-reporter": "2.4.1",
     "jest-json-schema": "2.0.0",
     "jsonfile": "4.0.0",
-    "prettier": "1.12.1",
-    "supertest": "3.0.0",
-    "winston": "2.4.2"
+    "prettier": "1.13.7",
+    "supertest": "3.1.0",
+    "winston": "3.0.0"
   },
   "jest": {
     "verbose": true,
     "setupTestFrameworkScriptFile": "<rootDir>/helpers/frameworkSetup.js",
     "globalSetup": "<rootDir>/helpers/setup.js",
-    "testMatch": [
-      "<rootDir>/tests/*.js"
-    ],
     "reporters": [
       "default",
       "<rootDir>/node_modules/jest-html-reporter",
