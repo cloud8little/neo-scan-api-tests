@@ -1,9 +1,6 @@
 const { req } = require('../helpers/config');
 
 const getAddress = {
-  getAddress: hash => {
-    return req(`/get_address/${hash}`);
-  },
   getAddressAbstracts: (hash, page) => {
     return req(`/get_address_abstracts/${hash}/${page}`);
   },
