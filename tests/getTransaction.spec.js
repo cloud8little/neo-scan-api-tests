@@ -2,7 +2,7 @@ const fixtures = require('../fixtures/getTransaction');
 
 describe('GET /get_transaction/{hash_string}', () => {
   it('should be online', () => {
-    return fixtures.getLastTransactions().then(response => {
+    return fixtures.getLastTransactionsByAddress(process.env.WALLET_HASH, 1).then(response => {
       const lastTxId = response.body[0].txid;
       return fixtures
         .getTransaction(lastTxId)
