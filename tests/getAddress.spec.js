@@ -11,17 +11,6 @@ describe('GET /get_address_abstracts/{hash_string}/{page}', () => {
   });
 });
 
-describe('GET /get_address_neon/{hash_string}', () => {
-  it('should be online', () => {
-    return fixtures
-      .getAddressNeon(process.env.WALLET_HASH)
-      .expect(200)
-      .then(response => {
-        expect(response.body).toEqual(expect.anything());
-      });
-  });
-});
-
 describe('GET /get_address_to_address_abstracts/{hash_string}/{hash_string}/{page}', () => {
   it('should be online', () => {
     return fixtures
